@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  push:
+    tags: ["v**"]
+
+concurrency:
+  group: packages
+  cancel-in-progress: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Release
+        run: |
+          gh api --method POST -H "Accept: application/vnd.github+json" "/repos/${{ github.repository }}/releases" \
+                 -f tag_name="${{ github.ref_name }}" \
+                 -f target_commitish="main" \
+                 -f name="${{ github.ref_name }}" \
+                 -F generate_release_notes=true
