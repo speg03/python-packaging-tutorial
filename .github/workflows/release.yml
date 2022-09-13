@@ -11,13 +11,15 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Release
-        run: |
-          gh api --method POST -H "Accept: application/vnd.github+json" "/repos/${{ github.repository }}/releases" \
-                 -f tag_name="${{ github.ref_name }}" \
-                 -f target_commitish="main" \
-                 -f name="${{ github.ref_name }}" \
-                 -F generate_release_notes=true
+      - uses: actions/github-script@v6
+        name: Release
+        with:
+          script: |
+            github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: "${{ github.ref_name }}",
+              name: "${{ github.ref_name }}",
+              generate_release_notes: true
+            })
