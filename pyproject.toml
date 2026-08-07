@@ -1,23 +1,21 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "example-package-speg03"
-version = "0.0.4"
-authors = [
-  { name = "Takahiro Yano", email = "speg03@gmail.com" },
-]
+version = "0.0.0.dev0"
+authors = [{ name = "Takahiro Yano", email = "speg03@gmail.com" }]
 description = "A small example package"
 readme = "README.md"
-license = "MIT"
-requires-python = ">=3.7"
+requires-python = ">=3.9"
 classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Operating System :: OS Independent",
 ]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
 
 [project.urls]
 Homepage = "https://packaging.python.org/en/latest/tutorials/packaging-projects/"
 Repository = "https://github.com/speg03/python-packaging-tutorial"
+
+[build-system]
+requires = ["uv_build >= 0.12.0, <0.13.0"]
+build-backend = "uv_build"
