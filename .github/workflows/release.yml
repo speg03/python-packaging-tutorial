@@ -24,8 +24,9 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx --yes \
-          --package semantic-release@25 \
-          --package @semantic-release/exec@7 \
-          --package conventional-changelog-conventionalcommits \
-          semantic-release
+        run: |
+          npx --yes \
+              --package semantic-release@25 \
+              --package @semantic-release/exec@7 \
+              --package conventional-changelog-conventionalcommits \
+              semantic-release
