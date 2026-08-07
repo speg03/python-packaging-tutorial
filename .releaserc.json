@@ -1,0 +1,23 @@
+{
+  "preset": "conventionalcommits",
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "uv version ${nextRelease.version} && uv build",
+        "publishCmd": "uv publish --index testpypi"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          { "path": "dist/*.tar.gz", "label": "Source distribution" },
+          { "path": "dist/*.whl", "label": "Wheel distribution" }
+        ]
+      }
+    ]
+  ]
+}
